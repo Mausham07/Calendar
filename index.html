@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Calendar</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="calendar">
+    <div class="month">
+      <button class="prev" onclick="prevMonth()">&#10094;</button>
+      <div class="month-name">
+        <span id="month-name"></span> <span id="year"></span>
+      </div>
+      <button class="next" onclick="nextMonth()">&#10095;</button>
+    </div>
+    <div class="weekdays">
+      <div>Sun</div>
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+      <div>Sat</div>
+    </div>
+    <div class="days" id="days"></div>
+  </div>
+
+  <!-- Add Event Section -->
+  <div class="event-section">
+    <h3 id="selected-date">Selected Date: </h3>
+    <input type="text" id="event-input" placeholder="Add event" />
+    <button onclick="addEvent()">Add Event</button>
+
+    <h3>Events:</h3>
+    <ul id="event-list"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

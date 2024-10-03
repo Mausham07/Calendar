@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+.calendar {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+.month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.month-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.weekdays, .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-top: 10px;
+}
+
+.weekdays div, .days div {
+  padding: 10px;
+  text-align: center;
+}
+
+.weekdays div {
+  font-weight: bold;
+  color: #333;
+}
+
+.days div {
+  padding: 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+.days div:hover {
+  background-color: #f0f0f0;
+}
+
+.current-day {
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+}
+
+.event-section {
+  margin-top: 20px;
+  width: 350px;
+}
+
+#event-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#event-list {
+  list-style: none;
+  padding: 0;
+}
+
+#event-list li {
+  background-color: #eee;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  position: relative;
+}
+
+#event-list li .delete-event {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+}
