@@ -115,6 +115,10 @@ function renderEvents() {
   });
 }
 
+function test1() {
+  console.log("hello")
+}
+
 function deleteEvent(dateKey, eventIndex) {
   events[dateKey].splice(eventIndex, 1);  // Remove event
   renderEvents();  // Re-render events
