@@ -31,7 +31,9 @@
   <div class="event-section">
     <h3 id="selected-date">Selected Date: </h3>
     <input type="text" id="event-input" placeholder="Add event" />
-    <button onclick="addEvent()">Add Event</button>
+    <input type="time" id="event-start-time"/>
+    <input type="time" id="event-end-time"/>
+    <button id="button" onclick="addEvent()">Add Event</button>
 
     <h3>Events:</h3>
     <ul id="event-list"></ul>

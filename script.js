@@ -3,6 +3,16 @@ let currentDate = new Date();
 let selectedDate = null;
 let events = {};  // Store events as { "YYYY-MM-DD": ["event1", "event2"] }
 
+class MakeEvent {
+  constructor(name, date, timestart, timeend) {
+    this.name = name
+    this.timestart = timestart
+    this.timeend = timeend
+    this.date = date
+  }
+
+
+}
 function renderCalendar() {
   const monthNameElement = document.getElementById("month-name");
   const yearElement = document.getElementById("year");
@@ -16,7 +26,7 @@ function renderCalendar() {
 
   // First day of the month
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-  
+
   // Last day of the month
   const lastDate = new Date(currentYear, currentMonth + 1, 0).getDate();
 
@@ -40,7 +50,7 @@ function renderCalendar() {
     }
 
     // Event handler to select a day
-    dayDiv.onclick = function() {
+    dayDiv.onclick = function () {
       selectDate(new Date(currentYear, currentMonth, day));
     };
 
@@ -64,6 +74,8 @@ function selectDate(date) {
   renderEvents();
 }
 
+document.getElementById('event-input').addEventListener('keypress', function (e) { if (e.key === 'Enter') { addEvent() } });
+
 function addEvent() {
   if (!selectedDate) {
     alert("Please select a date first.");
@@ -78,14 +90,30 @@ function addEvent() {
     return;
   }
 
+  const eventstarttime = document.getElementById('event-start-time').value
+
+  if (eventstarttime === '') {
+    alert("please enter a start time")
+    return;
+  }
+  const eventendtime = document.getElementById('event-end-time').value
+
+  if (eventendtime === '') {
+    alert("please enter a end time")
+    return;
+  }
+
   const dateKey = selectedDate.toISOString().split('T')[0]; // Format: "YYYY-MM-DD"
+  Newevent = new MakeEvent(eventText, dateKey, eventstarttime, eventendtime)
 
   if (!events[dateKey]) {
     events[dateKey] = [];
   }
 
-  events[dateKey].push(eventText);
+  events[dateKey].push(Newevent);
   eventInput.value = '';  // Clear input
+  document.getElementById('event-start-time').value = '';  // Clear input
+  document.getElementById('event-end-time').value = '';  // Clear input
   renderEvents();
 }
 
@@ -100,13 +128,13 @@ function renderEvents() {
 
   dateEvents.forEach((eventText, index) => {
     const li = document.createElement('li');
-    li.textContent = eventText;
+    li.textContent = `${eventText.name} ${eventText.timestart}-${eventText.timeend}`;
 
     // Delete event button
     const deleteBtn = document.createElement('span');
     deleteBtn.textContent = '✖';
     deleteBtn.classList.add('delete-event');
-    deleteBtn.onclick = function() {
+    deleteBtn.onclick = function () {
       deleteEvent(dateKey, index);
     };
 
@@ -126,16 +154,28 @@ function checkEventsForTomorrow() {
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
-
+  // const year = tomorrow.getFullYear();
+  // const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+  // const day = String(tomorrow.getDate()).padStart(2, '0');
+  // const formattedDate = `${year}-${month}-${day}`;
+  // const tomorrowKey = formattedDate;
   const tomorrowKey = tomorrow.toISOString().split('T')[0];
 
   if (events[tomorrowKey] && events[tomorrowKey].length > 0) {
-    alert(`You have events tomorrow: ${events[tomorrowKey].join(', ')}`);
+    let eventlist = ''
+    events[tomorrowKey].forEach(element => {
+      eventlist += `${element.name} ${element.timestart}-${element.timeend}\n`
+    })
+
+    alert(`You have events tomorrow:\n${eventlist}`)
   }
 }
 
 // Check events for tomorrow every 10 seconds (can be adjusted as needed)
-setInterval(checkEventsForTomorrow, 10000);  // 10 seconds for demo purposes
+// setInterval(checkEventsForTomorrow,100000000000);  // 10 seconds for demo purposes
 
 // Render the calendar when the page loads
 renderCalendar();
+
+selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()))
+checkEventsForTomorrow()
