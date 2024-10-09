@@ -116,7 +116,7 @@ function renderEvents() {
 }
 
 function test1() {
-  console.log("hello")
+  console.log("Hello World!")
 }
 
 function deleteEvent(dateKey, eventIndex) {
