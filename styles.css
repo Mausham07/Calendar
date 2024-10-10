@@ -102,10 +102,18 @@ button {
 
 #event-list li .delete-event {
   position: absolute;
+  opacity: 0;
+  right: 10px;
+  top: 10px;
+}
+
+
+#event-list li .delete-event:hover{
+  position: absolute;
+  opacity: 1;
   right: 10px;
   top: 10px;
   cursor: pointer;
   color: red;
   font-weight: bold;
 }
-
