@@ -10,9 +10,14 @@ class MakeEvent {
     this.timeend = timeend
     this.date = date
   }
-
-
 }
+
+function createDateElement() {
+  const dateElement = document.createElement("div")
+  dateElement.className = "date-square"
+  return dateElement
+}
+
 function renderCalendar() {
   const monthNameElement = document.getElementById("month-name");
   const yearElement = document.getElementById("year");
@@ -35,18 +40,21 @@ function renderCalendar() {
 
   // Add empty slots for days of previous month
   for (let i = 0; i < firstDay; i++) {
-    const emptyDiv = document.createElement("div");
+    const emptyDiv = createDateElement()
     daysElement.appendChild(emptyDiv);
   }
 
   // Add days of the current month
   for (let day = 1; day <= lastDate; day++) {
-    const dayDiv = document.createElement("div");
-    dayDiv.textContent = day;
+    // Put the date text in a span element to make styling easier
+    const dayDiv = createDateElement()
+    const textElement = document.createElement("span");
+    textElement.textContent = day
+    dayDiv.appendChild(textElement)
 
     // Highlight current day
     if (day === currentDate.getDate() && currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear()) {
-      dayDiv.classList.add("current-day");
+      textElement.classList.add("current-day");
     }
 
     // Event handler to select a day
