@@ -90,21 +90,21 @@ function addEvent() {
     return;
   }
 
-  const eventstarttime = document.getElementById('event-start-time').value
+  const eventstarttime = document.getElementById('event-start-time')
 
-  if (eventstarttime === '') {
+  if (eventstarttime.value === '') {
     alert("please enter a start time")
     return;
   }
-  const eventendtime = document.getElementById('event-end-time').value
+  const eventendtime = document.getElementById('event-end-time')
 
-  if (eventendtime === '') {
+  if (eventendtime.value === '') {
     alert("please enter a end time")
     return;
   }
 
   const dateKey = selectedDate.toISOString().split('T')[0]; // Format: "YYYY-MM-DD"
-  Newevent = new MakeEvent(eventText, dateKey, eventstarttime, eventendtime)
+  Newevent = new MakeEvent(eventText, dateKey, eventstarttime.value, eventendtime.value)
 
   if (!events[dateKey]) {
     events[dateKey] = [];
@@ -112,8 +112,8 @@ function addEvent() {
 
   events[dateKey].push(Newevent);
   eventInput.value = '';  // Clear input
-  document.getElementById('event-start-time').value = '';  // Clear input
-  document.getElementById('event-end-time').value = '';  // Clear input
+  eventstarttime.value = '';  // Clear input
+  eventendtime.value = '';  // Clear input
   renderEvents();
 }
 
@@ -146,8 +146,11 @@ function renderEvents() {
 
 
 function deleteEvent(dateKey, eventIndex) {
-  events[dateKey].splice(eventIndex, 1);  // Remove event
-  renderEvents();  // Re-render events
+  let responce = window.confirm('Are you sure you want to delete event it cant be undone if you do')
+  if (responce) {
+    events[dateKey].splice(eventIndex, 1);  // Remove event
+    renderEvents();  // Re-render events
+  }
 }
 
 function checkEventsForTomorrow() {
