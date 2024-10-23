@@ -131,3 +131,17 @@ button {
   color: red;
   font-weight: bold;
 }
+
+.event-section ul{
+  margin-bottom: 20%;
+  
+}
+
+.shownEvent {
+  display: flex;
+  gap: 3rem;
+
+}
+#selected-date{
+  margin-bottom: 10%;
+}
