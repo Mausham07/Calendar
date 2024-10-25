@@ -99,20 +99,22 @@ function addEvent() {
   }
 
   const eventstarttime = document.getElementById('event-start-time')
-
+  
   if (eventstarttime.value === '') {
     alert("please enter a start time")
     return;
   }
+  starttime=convertTime(eventstarttime.value)
   const eventendtime = document.getElementById('event-end-time')
-
+  
   if (eventendtime.value === '') {
     alert("please enter a end time")
     return;
   }
+  endtime=convertTime(eventendtime.value)
 
   const dateKey = selectedDate.toISOString().split('T')[0]; // Format: "YYYY-MM-DD"
-  Newevent = new MakeEvent(eventText, dateKey, eventstarttime.value, eventendtime.value)
+  Newevent = new MakeEvent(eventText, dateKey, starttime,endtime)
 
   if (!events[dateKey]) {
     events[dateKey] = [];
@@ -136,7 +138,16 @@ function renderEvents() {
 
   dateEvents.forEach((eventText, index) => {
     const li = document.createElement('li');
-    li.textContent = `${eventText.name} ${eventText.timestart}-${eventText.timeend}`;
+    li.className="shownEvent"
+    const time = document.createElement('span')
+    time.textContent = `${eventText.timestart}-${eventText.timeend}`
+    const currentEvent = document.createElement('span')
+    currentEvent.textContent = `${eventText.name}`
+    
+    li.appendChild(currentEvent)
+    li.appendChild(time)
+
+    // li.textContent = `${eventText.timestart}-${eventText.timeend}  ${eventText.name} `;
 
     // Delete event button
     const deleteBtn = document.createElement('span');
@@ -175,11 +186,29 @@ function checkEventsForTomorrow() {
   if (events[tomorrowKey] && events[tomorrowKey].length > 0) {
     let eventlist = ''
     events[tomorrowKey].forEach(element => {
-      eventlist += `${element.name} ${element.timestart}-${element.timeend}\n`
+      eventlist += `${element.name} ${element.timestart} - ${element.timeend}\n`
     })
 
     alert(`You have events tomorrow:\n${eventlist}`)
   }
+}
+
+function convertTime(time){
+  let hourmin=time.split(':')
+  let hours = parseInt(hourmin[0])
+  let min = hourmin[1]
+  ampm='AM'
+  if (hours>12){
+    hours-=12
+    ampm='PM'
+  }
+  else if (hours==12){
+    ampm='PM'
+  }
+  else if (hours==0){
+    hours+=12
+  }
+  return `${hours}:${min}${ampm}`
 }
 
 // Check events for tomorrow every 10 seconds (can be adjusted as needed)
