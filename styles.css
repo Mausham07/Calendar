@@ -3,6 +3,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+header {
+  position: fixed;
+  top: 0;
+  background-color: darkgray;
+}
+
+nav {
+  display: flex;
+  justify-content: left;
+}
 
 body {
   font-family: Arial, sans-serif;
