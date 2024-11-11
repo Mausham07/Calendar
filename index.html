@@ -43,8 +43,9 @@
   <!-- <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, collection, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
+    import { getFirestore, collection, addDoc, doc, getDocs, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
   
     // Your web app's Firebase configuration
@@ -55,13 +56,14 @@
       projectId: "calander-be328",
       storageBucket: "calander-be328.firebasestorage.app",
       messagingSenderId: "136573393749",
-      appId: "1:136573393749:web:585fcd81a7b72baf8c2ddc",
-      measurementId: "G-HEBFM5YXFT"
+      appId: "1:136573393749:web:5f2a178f4566d2678c2ddc",
+      measurementId: "G-W7L16093Y4"
     };
   
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
+    const db = getFirestore(app);
   </script> -->
 
 </body>
