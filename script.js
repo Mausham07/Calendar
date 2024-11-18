@@ -3,12 +3,14 @@ let currentDate = new Date();
 let selectedDate = null;
 let events = {};  // Store events as { "YYYY-MM-DD": ["event1", "event2"] }
 
+
 class MakeEvent {
   constructor(name, date, timestart, timeend) {
     this.name = name
+    this.date = date
     this.timestart = timestart
     this.timeend = timeend
-    this.date = date
+
   }
 }
 
@@ -83,6 +85,8 @@ function selectDate(date) {
 }
 
 document.getElementById('event-input').addEventListener('keypress', function (e) { if (e.key === 'Enter') { addEvent() } });
+document.getElementById('event-start-time').addEventListener('keypress', function (e) { if (e.key === 'Enter') { addEvent() } });
+document.getElementById('event-end-time').addEventListener('keypress', function (e) { if (e.key === 'Enter') { addEvent() } });
 
 function addEvent() {
   if (!selectedDate) {
@@ -99,22 +103,22 @@ function addEvent() {
   }
 
   const eventstarttime = document.getElementById('event-start-time')
-  
+
   if (eventstarttime.value === '') {
     alert("please enter a start time")
     return;
   }
-  starttime=convertTime(eventstarttime.value)
+  starttime = convertTime(eventstarttime.value)
   const eventendtime = document.getElementById('event-end-time')
-  
+
   if (eventendtime.value === '') {
     alert("please enter a end time")
     return;
   }
-  endtime=convertTime(eventendtime.value)
-
-  const dateKey = selectedDate.toISOString().split('T')[0]; // Format: "YYYY-MM-DD"
-  Newevent = new MakeEvent(eventText, dateKey, starttime,endtime)
+  endtime = convertTime(eventendtime.value)
+  const dateKey = `${selectedDate.getFullYear()}-${(selectedDate.getMonth()+1).toString().padStart(2,'0')}-${selectedDate.getDate()}`; // Format: "YYYY-MM-DD"
+  console.log(dateKey)
+  Newevent = new MakeEvent(eventText, dateKey, starttime, endtime)
 
   if (!events[dateKey]) {
     events[dateKey] = [];
@@ -191,12 +195,12 @@ function renderEvents() {
 
   dateEvents.forEach((eventText, index) => {
     const li = document.createElement('li');
-    li.className="shownEvent"
+    li.className = "shownEvent"
     const time = document.createElement('span')
     time.textContent = `${eventText.timestart}-${eventText.timeend}`
     const currentEvent = document.createElement('span')
     currentEvent.textContent = `${eventText.name}`
-    
+
     li.appendChild(currentEvent)
     li.appendChild(time)
 
@@ -229,12 +233,9 @@ function checkEventsForTomorrow() {
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
-  // const year = tomorrow.getFullYear();
-  // const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
-  // const day = String(tomorrow.getDate()).padStart(2, '0');
-  // const formattedDate = `${year}-${month}-${day}`;
-  // const tomorrowKey = formattedDate;
-  const tomorrowKey = tomorrow.toISOString().split('T')[0];
+
+  const tomorrowKey = `${tomorrow.getFullYear()}-${(tomorrow.getMonth()+1).toString().padStart(2,'0')}-${tomorrow.getDate().toString().padStart(2,'0')}`;
+  ;
 
   if (events[tomorrowKey] && events[tomorrowKey].length > 0) {
     let eventlist = ''
@@ -246,20 +247,21 @@ function checkEventsForTomorrow() {
   }
 }
 
-function convertTime(time){
-  let hourmin=time.split(':')
+function convertTime(time) {
+  let hourmin = time.split(':')
   let hours = parseInt(hourmin[0])
   let min = hourmin[1]
-  ampm='AM'
-  if (hours>12){
-    hours-=12
-    ampm='PM'
+  ampm = 'AM'
+ 
+  if (hours > 12) {
+    hours -= 12
+    ampm = 'PM'
   }
-  else if (hours==12){
-    ampm='PM'
+  else if (hours == 12) {
+    ampm = 'PM'
   }
-  else if (hours==0){
-    hours+=12
+  else if (hours == 0) {
+    hours += 12
   }
   return `${hours}:${min}${ampm}`
 }

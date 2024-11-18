@@ -20,7 +20,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  aspect-ratio: 7 / 5;
+  aspect-ratio: 7 / 4;
   width: 100%;
   max-width: 900px; /* Increased max-width for a larger calendar */
   text-align: center;
@@ -45,6 +45,7 @@ button {
   border: none;
   font-size: 24px;
   cursor: pointer;
+  margin-top: 30px;
   color: #007bff;
 }
 
@@ -73,6 +74,17 @@ button:hover {
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
+  position: relative;
+}
+
+.date-square {
+  aspect-ratio: 1 / .7;
+  width: 100%;
+  max-height: 100%;
+}
+
+.date-square span {
+  padding: 0.5rem;
   transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
@@ -169,6 +181,7 @@ button:hover {
 #event-list {
   list-style: none;
   padding: 0;
+
   margin-bottom: 70px; /* Space between the event list and the input field */
 }
 
