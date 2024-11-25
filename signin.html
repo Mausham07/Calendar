@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign-In</title>
 </head>
+
 <body>
-    <input type="text" placeholder="username">
-    <input type="password" placeholder="password">
-    <a href="index.html"><button>log in</button></a>
+    <input id="username" type="text" placeholder="username">
+    <input id="password" type="password" placeholder="password">
+    <!-- <a href="index.html"><button>log in</button></a> -->
+    <button id="signin">log in</button>
 </body>
+<script>
+    function verify(username, password) {
+        if (username != '' && password != '') {
+            if (/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.{8,})/.test(password)) {
+                console.log("yes")
+
+            }
+            else {
+                alert('not a valid password')
+                console.log('not a valid password')
+            }
+        }
+        else {
+            alert("input username and/or password")
+            console.log("username and/or password not inputed")
+        }
+
+    }
+    document.getElementById('signin').addEventListener('click', () => verify(document.getElementById('username').value, document.getElementById('password').value))
+</script>
+
 </html>
