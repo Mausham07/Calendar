@@ -17,12 +17,12 @@
     function verify(username, password) {
         if (username != '' && password != '') {
             if (/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.{8,})/.test(password)) {
-                console.log("yes")
+                console.log(`yes (${password})`)
 
             }
             else {
-                alert('not a valid password')
-                console.log('not a valid password')
+                alert(`${password} is not a valid password`)
+                console.log(`${password} is not a valid password`)
             }
         }
         else {
