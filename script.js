@@ -131,58 +131,58 @@ function addEvent() {
   renderEvents();
 }
 
-// async function addEvent() {
-//   if (!selectedDate) {
-//     alert("Please select a date first.");
-//     return;
-//   }
+async function addEvent() {
+  if (!selectedDate) {
+    alert("Please select a date first.");
+    return;
+  }
 
-//   const eventInput = document.getElementById('event-input');
-//   const eventText = eventInput.value.trim();
-//   if (eventText === "") {
-//     alert("Please enter an event.");
-//     return;
-//   }
+  const eventInput = document.getElementById('event-input');
+  const eventText = eventInput.value.trim();
+  if (eventText === "") {
+    alert("Please enter an event.");
+    return;
+  }
 
-//   const eventStartTime = document.getElementById('event-start-time').value;
-//   const eventEndTime = document.getElementById('event-end-time').value;
-//   if (!eventStartTime || !eventEndTime) {
-//     alert("Please enter both start and end times.");
-//     return;
-//   }
+  const eventStartTime = document.getElementById('event-start-time').value;
+  const eventEndTime = document.getElementById('event-end-time').value;
+  if (!eventStartTime || !eventEndTime) {
+    alert("Please enter both start and end times.");
+    return;
+  }
 
-//   const dateKey = selectedDate.toISOString().split('T')[0];
-//   const starttime = convertTime(eventStartTime);
-//   const endtime = convertTime(eventEndTime);
+  const dateKey = selectedDate.toISOString().split('T')[0];
+  const starttime = convertTime(eventStartTime);
+  const endtime = convertTime(eventEndTime);
 
-//   const newEvent = {
-//     name: eventText,
-//     date: dateKey,
-//     timestart: starttime,
-//     timeend: endtime
-//   };
+  const newEvent = {
+    name: eventText,
+    date: dateKey,
+    timestart: starttime,
+    timeend: endtime
+  };
 
-//   try {
-//     // Add the event to Firestore under a collection called 'events' with the date as a document ID
-//     const eventRef = doc(db, "events", dateKey);
-//     await setDoc(eventRef, { [eventText]: newEvent }, { merge: true });
+  try {
+    // Add the event to Firestore under a collection called 'events' with the date as a document ID
+    // const eventRef = doc(db, "events", dateKey);
+    // await setDoc(eventRef, { [eventText]: newEvent }, { merge: true });
     
-//     // Store locally for display
-//     if (!events[dateKey]) {
-//       events[dateKey] = [];
-//     }
-//     events[dateKey].push(newEvent);
+    // Store locally for display
+    if (!events[dateKey]) {
+      events[dateKey] = [];
+    }
+    events[dateKey].push(newEvent);
 
-//     eventInput.value = ''; // Clear input fields
-//     document.getElementById('event-start-time').value = '';
-//     document.getElementById('event-end-time').value = '';
+    eventInput.value = ''; // Clear input fields
+    document.getElementById('event-start-time').value = '';
+    document.getElementById('event-end-time').value = '';
 
-//     renderEvents(); // Re-render events
-//     alert("Event added to Firestore!");
-//   } catch (error) {
-//     console.error("Error adding event to Firestore:", error);
-//   }
-// }
+    renderEvents(); // Re-render events
+    alert("Event added to Firestore!");
+  } catch (error) {
+    console.error("Error adding event to Firestore:", error);
+  }
+}
 
 function renderEvents() {
   const eventList = document.getElementById('event-list');
