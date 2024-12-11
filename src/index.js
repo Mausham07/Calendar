@@ -1,27 +1,73 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 import { api_key } from "./api_key";
+import { emailInput, passwordInput, signinBtn, signupBtn } from "./ui.js";
 
 const firebaseConfig = {
-  apiKey: api_key, // DO NOT COMMIT THE API KEY!
-  authDomain: "cse310-shared-calendar.firebaseapp.com",
-  projectId: "cse310-shared-calendar",
-  storageBucket: "cse310-shared-calendar.firebasestorage.app",
-  messagingSenderId: "102136831528",
-  appId: "1:102136831528:web:51d45e19d0620048555f1d",
-  measurementId: "G-BVS3SYJZZ6",
+    apiKey: api_key, // DO NOT COMMIT THE API KEY!
+    authDomain: "cse310-shared-calendar.firebaseapp.com",
+    projectId: "cse310-shared-calendar",
+    storageBucket: "cse310-shared-calendar.firebasestorage.app",
+    messagingSenderId: "102136831528",
+    appId: "1:102136831528:web:51d45e19d0620048555f1d",
+    measurementId: "G-BVS3SYJZZ6",
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 
+const loginWithEmailPassword = async () => {
+    console.log("login called");
+    const loginEmail = emailInput.value;
+    const loginPassword = passwordInput.value;
+
+    try {
+        const userCredentials = await signInWithEmailAndPassword(
+            auth,
+            loginEmail,
+            loginPassword
+        );
+        console.log(userCredentials);
+        console.log(userCredentials.user);
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+const signupWithEmailPassword = async () => {
+    console.log("Signup called");
+    const loginEmail = emailInput.value;
+    const loginPassword = passwordInput.value;
+
+    try {
+        const userCredentials = await createUserWithEmailAndPassword(
+            auth,
+            loginEmail,
+            loginPassword
+        );
+        console.log(userCredentials);
+        console.log(userCredentials.user);
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+// Adds an event listener that detects whenever the state of the user changes
 onAuthStateChanged(auth, (user) => {
-  if (user != null) {
-    console.log("Logged in");
-  } else {
-    console.log("No User");
-  }
+    if (user != null) {
+        console.log("Logged in");
+    } else {
+        console.log("No User");
+    }
 });
+
+signinBtn.addEventListener("click", loginWithEmailPassword);
+signupBtn.addEventListener("click", signupWithEmailPassword);
