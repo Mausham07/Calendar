@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 import { api_key } from "./api_key";
@@ -17,3 +17,11 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
+
+onAuthStateChanged(auth, (user) => {
+  if (user != null) {
+    console.log("Logged in");
+  } else {
+    console.log("No User");
+  }
+});
