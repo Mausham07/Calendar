@@ -15,12 +15,16 @@ import {
     signinBtn,
     signupBtn,
     signoutBtn,
+    prevBtn,
+    nextBtn,
 } from "./ui.js";
 import {
     showCalendarPage,
     showSigninPage,
     showSigninError,
     hideSigninError,
+    prevMonth,
+    nextMonth,
 } from "./utils.js";
 
 const firebaseConfig = {
@@ -133,3 +137,7 @@ emailInput.addEventListener("keydown", (event) => {
 passwordInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") loginWithEmailPassword();
 });
+
+// Add calender navigation event listeners
+prevBtn.addEventListener("click", prevMonth);
+nextBtn.addEventListener("click", nextMonth);
