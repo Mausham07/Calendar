@@ -6,7 +6,15 @@ import {
     createUserWithEmailAndPassword,
     signOut,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    addDoc,
+    collection,
+    collectionGroup,
+} from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 
 import { api_key } from "./api_key";
 import {
@@ -28,6 +36,7 @@ import {
     nextMonth,
     addEventLocally,
     createEvent,
+    DateObjToReadable,
 } from "./utils.js";
 
 const firebaseConfig = {
@@ -40,6 +49,7 @@ const firebaseConfig = {
     measurementId: "G-BVS3SYJZZ6",
 };
 
+// Init firebase and its relevent services
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
@@ -145,6 +155,16 @@ passwordInput.addEventListener("keydown", (event) => {
 prevBtn.addEventListener("click", prevMonth);
 nextBtn.addEventListener("click", nextMonth);
 addEventBtn.addEventListener("click", () => {
+    // Create the event to be added
     const currentEvent = createEvent();
+
+    // Get the date the event is on
+    const eventDate = DateObjToReadable(currentEvent.selectedDate);
+
+    // Handle adding the event to the calendar locally
     addEventLocally(currentEvent);
+
+    // Access the database and save the event on its date's document
+    const currentCollection = doc(db, `events-collection/${eventDate}`);
+    setDoc(currentCollection, { [uuidv4()]: currentEvent }, { merge: true });
 });

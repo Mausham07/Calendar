@@ -132,7 +132,11 @@ export function nextMonth() {
     renderCalendar();
 }
 
-const DateObjToReadable = (dateObject) => {
+export const DateObjToReadable = (dateObject) => {
+    if (dateObject == null) {
+        // This shouldn't really happen
+        console.warn(`dateObject inside DateObjToReadable was ${dateObject}`);
+    }
     return `${dateObject.getFullYear()}-${(dateObject.getMonth() + 1)
         .toString()
         .padStart(2, "0")}-${dateObject.getDate()}`; // Format: "YYYY-MM-DD"
@@ -196,6 +200,8 @@ const updateCurrentEvents = () => {
         appendEvent(event);
     }
 };
+
+export const setEventsFromDB = (idkYet) => {};
 
 // This seems like horible practice but idk what else to do
 // These need to be called on page load
