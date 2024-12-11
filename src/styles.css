@@ -1,10 +1,13 @@
 body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+.sign-in-view {
+    display: flex;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
 }
 .container {
     background-color: white;
@@ -24,7 +27,7 @@ button {
     border-radius: 4px;
     box-sizing: border-box;
 }
-.sign-in button {
+.sign-in-view button {
     cursor: pointer;
     border: none;
 }
@@ -35,9 +38,13 @@ button {
 #sign-in-btn:hover {
     background-color: #0056b3;
 }
-#signup-button {
+#signup-btn {
     color: #007bff;
 }
-#signup-button:hover {
+#signup-btn:hover {
     color: #0056b3;
+}
+
+.calendar-view {
+    display: none;
 }

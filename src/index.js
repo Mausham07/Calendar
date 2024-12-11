@@ -4,11 +4,19 @@ import {
     onAuthStateChanged,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
+    signOut,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 import { api_key } from "./api_key";
-import { emailInput, passwordInput, signinBtn, signupBtn } from "./ui.js";
+import {
+    emailInput,
+    passwordInput,
+    signinBtn,
+    signupBtn,
+    signoutBtn,
+} from "./ui.js";
+import { showCalendarPage, showSigninPage } from "./utils.js";
 
 const firebaseConfig = {
     apiKey: api_key, // DO NOT COMMIT THE API KEY!
@@ -60,14 +68,21 @@ const signupWithEmailPassword = async () => {
     }
 };
 
+const logout = async () => {
+    await signOut(auth);
+};
+
 // Adds an event listener that detects whenever the state of the user changes
 onAuthStateChanged(auth, (user) => {
-    if (user != null) {
-        console.log("Logged in");
+    if (user) {
+        // If we have a signed in user, show the calendar
+        showCalendarPage();
     } else {
-        console.log("No User");
+        // Otherwise show the signin page
+        showSigninPage();
     }
 });
 
 signinBtn.addEventListener("click", loginWithEmailPassword);
 signupBtn.addEventListener("click", signupWithEmailPassword);
+signoutBtn.addEventListener("click", logout);
