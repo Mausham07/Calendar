@@ -6,6 +6,11 @@ import {
     monthNameDiv,
     yearDiv,
     daysDiv,
+    eventDescriptionInput,
+    eventStartTimeInput,
+    eventEndTimeInput,
+    selectedDateh3,
+    eventList,
 } from "./ui";
 
 const currentDate = new Date();
@@ -23,6 +28,8 @@ const monthNames = [
     "November",
     "December",
 ];
+let selectedDate = currentDate;
+let events = {}; // Store events as { "YYYY-MM-DD": ["event1", "event2"] }}
 
 // Helper to create a div with a class of "date-square"
 const createDateElement = () => {
@@ -54,8 +61,11 @@ export const hideSigninError = () => {
     signinErrorMessage.style.display = "none";
 };
 
+const updateSelectedDayText = () => {
+    selectedDateh3.textContent = `Selected Date: ${selectedDate.toDateString()}`;
+};
+
 export function renderCalendar() {
-    console.log("Render Calendar");
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
 
@@ -94,9 +104,18 @@ export function renderCalendar() {
             textElement.classList.add("current-day");
         }
 
-        // Event handler to select a day
-        dayDiv.onclick = function () {
-            selectDate(new Date(currentYear, currentMonth, day));
+        currentDate.getHours;
+
+        // Event handler to set selectedDate
+        dayDiv.onclick = () => {
+            // Update the selected day to the clicked day
+            selectedDate = new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                day
+            );
+            updateSelectedDayText();
+            updateCurrentEvents();
         };
 
         daysDiv.appendChild(dayDiv);
@@ -112,3 +131,69 @@ export function nextMonth() {
     currentDate.setMonth(currentDate.getMonth() + 1);
     renderCalendar();
 }
+
+const DateObjToReadable = (dateObject) => {
+    return `${dateObject.getFullYear()}-${(dateObject.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}-${dateObject.getDate()}`; // Format: "YYYY-MM-DD"
+};
+
+const AMorPM = (timeInputElement) => {
+    if (timeInputElement) {
+        let [hour, minute] = timeInputElement.value.split(":");
+        hour = parseInt(hour);
+        return hour >= 12 ? "PM" : "AM";
+    }
+};
+
+export const addEvent = () => {
+    console.log(eventDescriptionInput.value);
+    console.log(eventStartTimeInput.value);
+    console.log(eventEndTimeInput.value);
+    // Create an event object for this event
+    const currentEvent = {
+        selectedDate: selectedDate,
+        startTime: `${eventStartTimeInput.value}${AMorPM(eventStartTimeInput)}`,
+        endTime: `${eventEndTimeInput.value}${AMorPM(eventEndTimeInput)}`,
+        description: eventDescriptionInput.value,
+    };
+
+    const dateKey = DateObjToReadable(selectedDate);
+    console.log(dateKey);
+
+    if (!events[dateKey]) {
+        events[dateKey] = [];
+    }
+
+    // Save the created event and display it to the user
+    events[dateKey].push(currentEvent);
+    appendEvent(currentEvent);
+};
+
+const appendEvent = (event) => {
+    const listItem = document.createElement("ul");
+    listItem.textContent = `${event.startTime}-${event.endTime}: ${event.description}`;
+    eventList.appendChild(listItem);
+};
+
+const updateCurrentEvents = () => {
+    // Clear out the event list
+    eventList.innerHTML = "";
+
+    // Grab the events for the currently selected day
+    const selectedDateKey = DateObjToReadable(selectedDate);
+    const selectedEvents = events[selectedDateKey];
+
+    // Don't want to loop over anything falsy, so return early
+    if (selectedEvents == null) {
+        return;
+    }
+
+    for (const event of selectedEvents) {
+        appendEvent(event);
+    }
+};
+
+// This seems like horible practice but idk what else to do
+// Need to set the selected day text on load
+updateSelectedDayText();

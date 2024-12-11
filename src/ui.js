@@ -18,3 +18,11 @@ export const yearDiv = document.querySelector("#year");
 export const daysDiv = document.querySelector("#days");
 export const prevBtn = document.querySelector("#prev-month");
 export const nextBtn = document.querySelector("#next-month");
+export const addEventBtn = document.querySelector("#add-event-btn");
+
+// Event elements
+export const selectedDateh3 = document.querySelector("#selected-date");
+export const eventList = document.querySelector("#event-list");
+export const eventDescriptionInput = document.querySelector("#event-input");
+export const eventStartTimeInput = document.querySelector("#event-start-time");
+export const eventEndTimeInput = document.querySelector("#event-end-time");

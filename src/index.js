@@ -17,6 +17,7 @@ import {
     signoutBtn,
     prevBtn,
     nextBtn,
+    addEventBtn,
 } from "./ui.js";
 import {
     showCalendarPage,
@@ -25,6 +26,7 @@ import {
     hideSigninError,
     prevMonth,
     nextMonth,
+    addEvent,
 } from "./utils.js";
 
 const firebaseConfig = {
@@ -141,3 +143,4 @@ passwordInput.addEventListener("keydown", (event) => {
 // Add calender navigation event listeners
 prevBtn.addEventListener("click", prevMonth);
 nextBtn.addEventListener("click", nextMonth);
+addEventBtn.addEventListener("click", addEvent);

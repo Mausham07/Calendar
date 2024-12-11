@@ -239,7 +239,7 @@ button:hover {
     outline: none;
 }
 
-#button {
+#add-event-btn {
     width: 100%;
     padding: 12px;
     font-size: 1rem;
@@ -253,13 +253,13 @@ button:hover {
     box-shadow: 0px 4px 8px rgba(40, 167, 69, 0.3);
 }
 
-#button:hover {
+#add-event-btn:hover {
     background-color: #218838;
     box-shadow: 0px 6px 10px rgba(40, 167, 69, 0.3);
     transform: translateY(-2px);
 }
 
-#button:active {
+#add-event-btn:active {
     background-color: #1e7e34;
     box-shadow: 0px 2px 4px rgba(40, 167, 69, 0.2);
     transform: translateY(0);
