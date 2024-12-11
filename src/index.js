@@ -11,8 +11,10 @@ import {
     doc,
     setDoc,
     addDoc,
+    getDocs,
     collection,
     collectionGroup,
+    query,
 } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 
@@ -37,6 +39,7 @@ import {
     addEventLocally,
     createEvent,
     DateObjToReadable,
+    setEventsFromDB,
 } from "./utils.js";
 
 const firebaseConfig = {
@@ -132,6 +135,10 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         // If we have a signed in user, show the calendar
         showCalendarPage();
+
+        const allEventsQuery = query(collection(db, "events-collection"));
+        const querySnapshot = getDocs(allEventsQuery);
+        querySnapshot.then((snapshot) => setEventsFromDB(snapshot));
     } else {
         // Otherwise show the signin page
         showSigninPage();

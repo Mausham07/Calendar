@@ -201,7 +201,19 @@ const updateCurrentEvents = () => {
     }
 };
 
-export const setEventsFromDB = (idkYet) => {};
+export const setEventsFromDB = (querySnapshot) => {
+    querySnapshot.forEach((snap) => {
+        const date = snap.id;
+        const data = snap.data();
+        for (const [_, currentEvent] of Object.entries(data)) {
+            if (events[date] == null) {
+                events[date] = [];
+            }
+            events[date].push(currentEvent);
+        }
+    });
+    updateCurrentEvents();
+};
 
 // This seems like horible practice but idk what else to do
 // These need to be called on page load
