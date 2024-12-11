@@ -1,0 +1,20 @@
+{
+  "name": "calendar",
+  "version": "0.0.0",
+  "description": "A simple shared calendar app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Carter Solberg",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^11.0.2",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4"
+  }
+}
