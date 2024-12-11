@@ -16,7 +16,12 @@ import {
     signupBtn,
     signoutBtn,
 } from "./ui.js";
-import { showCalendarPage, showSigninPage } from "./utils.js";
+import {
+    showCalendarPage,
+    showSigninPage,
+    showSigninError,
+    hideSigninError,
+} from "./utils.js";
 
 const firebaseConfig = {
     apiKey: api_key, // DO NOT COMMIT THE API KEY!
@@ -43,8 +48,41 @@ const loginWithEmailPassword = async () => {
             loginEmail,
             loginPassword
         );
+
+        // Probably not necessary but eh
+        hideSigninError();
     } catch (e) {
         console.error(e);
+
+        // Show the user diffrent error messages based on the problem
+        switch (e.code) {
+            case "auth/invalid-email":
+                if (loginEmail == "") {
+                    showSigninError(
+                        `<p>Empty Email Field</p>
+                        <p>Please input an email.</p>`
+                    );
+                } else {
+                    showSigninError(
+                        `<p>Invalid Email.</p>
+                        <p>Please check your email and try again!</p>`
+                    );
+                }
+                break;
+            case "auth/missing-password":
+                showSigninError(`<p>Missing password</p>`);
+            case "auth/invalid-credential":
+                showSigninError(
+                    `<p>Wrong Password 😰</p>
+                    <p>Please Try Again!</p>`
+                );
+                break;
+            default:
+                showSigninError(
+                    `<p>Unknown Error</p>
+                    <p>Please try again in a few minutes.</p>`
+                );
+        }
     }
 };
 
@@ -61,6 +99,10 @@ const signupWithEmailPassword = async () => {
         );
     } catch (e) {
         console.error(e);
+        showSigninError(
+            `<p>Unknown Error</p>
+            <p>Please try again in a few minutes.</p>`
+        );
     }
 };
 
@@ -79,6 +121,15 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
+// Add event listeners to sign-up, sign-in, and sign-out
 signinBtn.addEventListener("click", loginWithEmailPassword);
 signupBtn.addEventListener("click", signupWithEmailPassword);
 signoutBtn.addEventListener("click", logout);
+
+// Sign-in if Enter is pressed while focus is on a sign-in input
+emailInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") loginWithEmailPassword();
+});
+passwordInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") loginWithEmailPassword();
+});

@@ -8,3 +8,5 @@ export const passwordInput = document.querySelector("#password");
 export const signinBtn = document.querySelector("#sign-in-btn");
 export const signupBtn = document.querySelector("#signup-btn");
 export const signoutBtn = document.querySelector("#sign-out-btn");
+
+export const signinErrorMessage = document.querySelector(".error");
