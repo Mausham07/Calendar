@@ -146,28 +146,28 @@ const AMorPM = (timeInputElement) => {
     }
 };
 
-export const addEvent = () => {
-    console.log(eventDescriptionInput.value);
-    console.log(eventStartTimeInput.value);
-    console.log(eventEndTimeInput.value);
-    // Create an event object for this event
-    const currentEvent = {
-        selectedDate: selectedDate,
-        startTime: `${eventStartTimeInput.value}${AMorPM(eventStartTimeInput)}`,
-        endTime: `${eventEndTimeInput.value}${AMorPM(eventEndTimeInput)}`,
-        description: eventDescriptionInput.value,
-    };
-
+export const addEventLocally = (currentEvent) => {
     const dateKey = DateObjToReadable(selectedDate);
-    console.log(dateKey);
 
     if (!events[dateKey]) {
         events[dateKey] = [];
     }
 
-    // Save the created event and display it to the user
+    // Save the created event
     events[dateKey].push(currentEvent);
-    appendEvent(currentEvent);
+
+    // Updating instead of appending to remove "no current events" element
+    updateCurrentEvents();
+};
+
+export const createEvent = () => {
+    // Create an event object based on user input
+    return {
+        selectedDate: selectedDate,
+        startTime: `${eventStartTimeInput.value}${AMorPM(eventStartTimeInput)}`,
+        endTime: `${eventEndTimeInput.value}${AMorPM(eventEndTimeInput)}`,
+        description: eventDescriptionInput.value,
+    };
 };
 
 const appendEvent = (event) => {
@@ -184,8 +184,11 @@ const updateCurrentEvents = () => {
     const selectedDateKey = DateObjToReadable(selectedDate);
     const selectedEvents = events[selectedDateKey];
 
-    // Don't want to loop over anything falsy, so return early
+    // If there are no events, then tell the user that instead of being blank
     if (selectedEvents == null) {
+        const paragraph = document.createElement("p");
+        paragraph.textContent = "No events scheduled today.";
+        eventList.appendChild(paragraph);
         return;
     }
 
@@ -195,5 +198,6 @@ const updateCurrentEvents = () => {
 };
 
 // This seems like horible practice but idk what else to do
-// Need to set the selected day text on load
+// These need to be called on page load
 updateSelectedDayText();
+updateCurrentEvents();

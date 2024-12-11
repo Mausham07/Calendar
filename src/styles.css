@@ -274,8 +274,6 @@ button:hover {
 #event-list {
     list-style: none;
     padding: 0;
-
-    margin-bottom: 70px; /* Space between the event list and the input field */
 }
 
 #event-input {

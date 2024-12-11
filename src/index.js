@@ -26,7 +26,8 @@ import {
     hideSigninError,
     prevMonth,
     nextMonth,
-    addEvent,
+    addEventLocally,
+    createEvent,
 } from "./utils.js";
 
 const firebaseConfig = {
@@ -143,4 +144,7 @@ passwordInput.addEventListener("keydown", (event) => {
 // Add calender navigation event listeners
 prevBtn.addEventListener("click", prevMonth);
 nextBtn.addEventListener("click", nextMonth);
-addEventBtn.addEventListener("click", addEvent);
+addEventBtn.addEventListener("click", () => {
+    const currentEvent = createEvent();
+    addEventLocally(currentEvent);
+});
