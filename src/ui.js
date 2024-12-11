@@ -1,4 +1,4 @@
-// Export relevent dom elements to declutter index.js
+/* Export relevent dom elements to declutter index.js */
 
 export const signinPage = document.querySelector(".sign-in-view");
 export const calendarPage = document.querySelector(".calendar-view");

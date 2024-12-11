@@ -32,8 +32,8 @@ const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 
+// Try to login existing user with user given email and password
 const loginWithEmailPassword = async () => {
-    console.log("login called");
     const loginEmail = emailInput.value;
     const loginPassword = passwordInput.value;
 
@@ -43,15 +43,13 @@ const loginWithEmailPassword = async () => {
             loginEmail,
             loginPassword
         );
-        console.log(userCredentials);
-        console.log(userCredentials.user);
     } catch (e) {
         console.error(e);
     }
 };
 
+// Create new user with user given email and password
 const signupWithEmailPassword = async () => {
-    console.log("Signup called");
     const loginEmail = emailInput.value;
     const loginPassword = passwordInput.value;
 
@@ -61,8 +59,6 @@ const signupWithEmailPassword = async () => {
             loginEmail,
             loginPassword
         );
-        console.log(userCredentials);
-        console.log(userCredentials.user);
     } catch (e) {
         console.error(e);
     }
