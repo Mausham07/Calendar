@@ -60,6 +60,20 @@ Team Responsibilities:
 - Create & Display Presentations : Daniel Cross
 - Submit Team Assignments  : Mausham Bista
 
+## Reflections
+
+Things that went well:
+
+- Despite our many challenges, we were able to get our product up and running
+- We all learned about branching and forking with GitHub
+- Even though we all had other priorities, we could all trust each other to get it done by the end
+
+Things that did not go well:
+
+- Communication and attendance
+- This class was on the back burner for many of us throughout the semester, so much of our progress did not come until the very end
+- We completed our MVP, but there are many bugs and things we could have tried to fix, as well as other features we would have liked to add
+
 ## Useful Websites to Learn More
 
 I found these websites useful in developing this software:
