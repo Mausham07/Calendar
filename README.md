@@ -45,13 +45,15 @@ Instructions for using the software:
 
 To recreate the development environment, you need the following software and/or libraries with the specified versions:
 
-* Web browser. 
+* Web browser.
+* JavaScript
+* API from Firebase
 
 ## Team Info
 
-**Team Communication**: Texting group chat
+## Team Communication: Texting group chat
 
-Team Responsibilities:
+**Team Responsibilities:**
 
 - Conducting Meetings : Tanner Johnson
 - Maintaining Team Assignment List: Jose Ayuso
