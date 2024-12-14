@@ -6,7 +6,7 @@
 
 **Project Goals**: Create a place to store sign-in and event data. 
 
-**Team Members**: Carter, Zack, Daniel, Mausham, Abishek, Jose, and Tanner
+**Team Members**: Carter, Zack, Daniel, Mausham, Abishek, Jose, Tanner. Joshua
 
 **Software Description**: A website that holds data, storing sign-in info and calendar events. 
 
@@ -61,6 +61,7 @@ To recreate the development environment, you need the following software and/or 
 - Maintaining Documentation : Carter Solberg 🚀 
 - Create & Display Presentations : Daniel Cross
 - Submit Team Assignments  : Mausham Bista
+- Help with programming  : Joshua Lane
 
 ## Reflections
 
