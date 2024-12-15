@@ -61,7 +61,7 @@ To recreate the development environment, you need the following software and/or 
 - Maintaining Documentation : Carter Solberg 🚀 
 - Create & Display Presentations : Daniel Cross
 - Submit Team Assignments  : Mausham Bista
-- Create Interface for Calander  : Joshua Lane
+- Create HTML Interface  : Joshua Lane
 
 ## Reflections
 
